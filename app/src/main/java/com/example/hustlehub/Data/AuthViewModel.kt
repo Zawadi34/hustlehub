@@ -18,7 +18,6 @@ class AuthViewModel : ViewModel(){
     private val _isLoading = MutableStateFlow(false)
     private val _errorMessage = MutableStateFlow<String?>(null)
 
-
     fun signup(firstname:String,lastname:String, email: String, password: String,
                navController: NavController,
                context: Context
@@ -40,7 +39,7 @@ class AuthViewModel : ViewModel(){
                     val userData = UserModel(
                         firstname = firstname, lastname = lastname,
                         email = email, password = password, userId = userId,
-                        navController = TODO(),
+                        navController = TODO(ROUTE_HOME),
                         context = TODO()
                     )
                     saveUserToDatabase(userId,userData,navController,context)
@@ -64,7 +63,7 @@ class AuthViewModel : ViewModel(){
             if (regRef.isSuccessful){
 
                 Toast.makeText(context,"User Successfully Registered", Toast.LENGTH_LONG).show()
-                navController.navigate(ROUTE_LOGIN)
+                navController.navigate(ROUTE_HOME)
             } else{
                 _errorMessage.value = regRef.exception?.message
 
@@ -72,30 +71,7 @@ class AuthViewModel : ViewModel(){
             }
         }
     }
-//    fun login(email: String,password: String,navController: NavController,
-//              context: Context){
-//        if (email.isBlank() || password.isBlank()){
-//
-//            Toast.makeText(context,"Email and password required",Toast.LENGTH_LONG).show()
-//            return
-//        }
-//        _isLoading.value = true
-//
-//        mAuth.signInWithEmailAndPassword(email,password)
-//            .addOnCompleteListener { task ->
-//                _isLoading.value = false
-//                if (task.isSuccessful){
-//
-//                    Toast.makeText(context,"User Successfully logged in",Toast.LENGTH_LONG).show()
-//                    navController.navigate(ROUTE_HOME)
-//                }else{
-//                    _errorMessage.value = task.exception?.message
-//
-//                    Toast.makeText(context,"Login failed",Toast.LENGTH_LONG).show()
-//
-//                }
-//            }
-//    }
+
 
     fun login(
         email: String,
@@ -110,7 +86,7 @@ class AuthViewModel : ViewModel(){
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(context, "Login successful!", Toast.LENGTH_SHORT).show()
-                        navController.navigate("ROUTE_HOME") // change this to your actual home route
+                        navController.navigate(ROUTE_HOME) // change this to your actual home route
                     } else {
                         Toast.makeText(
                             context,
@@ -127,3 +103,5 @@ class AuthViewModel : ViewModel(){
 
 
 }
+
+private fun Unit.addOnSuccessListener(function: () -> Unit) {}

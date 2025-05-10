@@ -35,7 +35,7 @@ fun SplashScreen(onNavigateToNext: () -> Unit){
                 contentDescription = "App Logo",
                 modifier = Modifier.size(150.dp))
             Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "Welcome to hustle hub App")
+            Text(text = "Welcome to hustle hub ")
         }
     }
 }
